@@ -1,0 +1,97 @@
+{
+  "animals": [
+    {
+      "id": 55452132,
+      "organization_id": "NJ133",
+      "url": "https://www.petfinder.com/dog/kenai-55452132/nj/sparta/one-step-closer-animal-rescue-o-dot-sc-dot-ar-dot-nj133/?referrer_id=e58ecb76-0e77-4455-aea0-297844d7e589",
+      "type": "Dog",
+      "species": "Dog",
+      "breeds": {
+        "primary": "Australian Shepherd",
+        "secondary": "Beagle",
+        "mixed": true,
+        "unknown": false
+      },
+      "colors": { "primary": null, "secondary": null, "tertiary": null },
+      "age": "Baby",
+      "gender": "Female",
+      "size": "Medium",
+      "coat": null,
+      "attributes": {
+        "spayed_neutered": true,
+        "house_trained": false,
+        "declawed": null,
+        "special_needs": false,
+        "shots_current": true
+      },
+      "environment": { "children": true, "dogs": true, "cats": null },
+      "tags": [],
+      "name": "Kenai",
+      "description": null,
+      "organization_animal_id": null,
+      "photos": [
+        {
+          "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421\u0026width=100",
+          "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421\u0026width=300",
+          "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421\u0026width=600",
+          "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421"
+        },
+        {
+          "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/1/?bust=1651349206\u0026width=100",
+          "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/1/?bust=1651349206\u0026width=300",
+          "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/1/?bust=1651349206\u0026width=600",
+          "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/1/?bust=1651349206"
+        },
+        {
+          "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/2/?bust=1651349206\u0026width=100",
+          "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/2/?bust=1651349206\u0026width=300",
+          "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/2/?bust=1651349206\u0026width=600",
+          "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/2/?bust=1651349206"
+        },
+        {
+          "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/3/?bust=1651349207\u0026width=100",
+          "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/3/?bust=1651349207\u0026width=300",
+          "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/3/?bust=1651349207\u0026width=600",
+          "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/3/?bust=1651349207"
+        }
+      ],
+      "primary_photo_cropped": {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421\u0026width=300",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421\u0026width=450",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421\u0026width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/55452132/4/?bust=1651865421"
+      },
+      "videos": [],
+      "status": "adoptable",
+      "status_changed_at": "2022-05-06T19:30:22+0000",
+      "published_at": "2022-05-06T19:30:22+0000",
+      "distance": null,
+      "contact": {
+        "email": "office2853@yahoo.com",
+        "phone": null,
+        "address": {
+          "address1": null,
+          "address2": null,
+          "city": "Sparta",
+          "state": "NJ",
+          "postcode": "07871",
+          "country": "US"
+        }
+      },
+      "_links": {
+        "self": { "href": "/v2/animals/55452132" },
+        "type": { "href": "/v2/types/dog" },
+        "organization": { "href": "/v2/organizations/nj133" }
+      }
+    }
+  ],
+  "pagination": {
+    "count_per_page": 1,
+    "total_count": 114764,
+    "current_page": 1,
+    "total_pages": 114764,
+    "_links": {
+      "next": { "href": "/v2/animals?limit=1\u0026type=dog\u0026page=2" }
+    }
+  }
+}
