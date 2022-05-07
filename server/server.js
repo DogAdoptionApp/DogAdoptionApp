@@ -7,9 +7,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //app.post
-app.post('/api/like', apiController.save, (req, res) => {
+app.post('/api/like/:userId', apiController.save, (req, res) => {
   console.log("api working");
-  return res.status(200).json(res.locals.dog);
+  return res.sendStatus(200);
 });
 
 //app.get
