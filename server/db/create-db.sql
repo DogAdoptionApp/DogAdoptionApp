@@ -27,8 +27,8 @@ CREATE TABLE Users (
 
 CREATE TABLE Users_Dogs (
     "_id" SERIAL PRIMARY KEY,
-    "dogs_id" INTEGER REFERENCES dogs,
-    "users_id" INTEGER REFERENCES users
+    "Dogs_id" INTEGER REFERENCES dogs,
+    "Users_id" INTEGER REFERENCES users
 );
 
 -- INSERT INTO Users VALUES (DEFAULT, 'Test User', 'testusername', 'testpassword', 'California', 'large', 'adult', 'male', 'pug', true, true);
