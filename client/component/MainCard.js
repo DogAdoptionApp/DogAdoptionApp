@@ -19,7 +19,8 @@ export default function ActionAreaCard(props) {
     var {name, age, size, breeds, primary_photo_cropped} = props.dog;
     breeds = breeds.primary;
     if (!primary_photo_cropped){
-      primary_photo_cropped = "https://petguidereviews.com/wp-content/uploads/2019/02/cartoon-dog-names.jpg";
+      // primary_photo_cropped = "https://petguidereviews.com/wp-content/uploads/2019/02/cartoon-dog-names.jpg";
+      props.handleNext()
     }
     else if (primary_photo_cropped.hasOwnProperty('medium')) {
       primary_photo_cropped = primary_photo_cropped.medium;
