@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Outlet, Link } from "react-router-dom";
 import Navbar from "./NavBar.js";
 import MainCard from "./MainCard.js";
 
@@ -25,10 +24,19 @@ const MainContainer = (props) => {
   const initialState = {
     dogs: [],
     index: 0,
+    preferences: {
+      location: null,
+      size_pref: null,
+      age_pref: null,
+      gender_pref: null,
+      breed_pref: null,
+      has_dog: null,
+      has_kid: null,
+    },
   };
 
   // This hook sets state to initial state.
-  const [dogs, changeDog] = useState(initialState);
+  const [state, changeState] = useState(initialState);
 
   // This function makes an API call to petfinder based on user input to preferences. Will run onClick of save button in preferences menu. Then it invokes 'changeDog' which updates the 'dog' array in state.
   const getPreferencesHandleClick = (form) => {
@@ -44,7 +52,8 @@ const MainContainer = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success", data);
+        changeState({ ...state, dogs: data.animals });
+        console.log("New State", dogs);
       })
       .catch((error) => {
         console.log("Error", error);
@@ -82,15 +91,20 @@ const MainContainer = (props) => {
     []
     // Consider changing second arg from 'dogs' array to something that chagnes once state.index === 99.
   );
+
+  function handleNext() {
+    changeState({ ...state, index: state.index + 1 });
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="sm">
         <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+          {/* send prefernces handle click to navbar */}
           <Navbar />
-          HELLO FROM APP COMPONENT
-          <MainCard />
-          <Link to="/likedCard">LikeCard</Link>
+          {/* <h1>{state.index}</h1> */}
+          <MainCard dog={state.dogs[state.index]} handleNext={handleNext} />
         </Box>
       </Container>
     </React.Fragment>
