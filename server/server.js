@@ -18,13 +18,23 @@ app.get('/api/like/:userId', apiController.fetchLikedDogs, (req, res) => {
   return res.status(200).json(res.locals.dogs);
 });
 
-//app.post -> stores user preferences in database
-
+//app.post -> stores user preferences in database /api/prefs/userId
+app.patch('/api/prefs/:userId', apiController.addPrefs, (req, res) => {
+  console.log('preferences added/updated');
+  return res.status(200).json(res.locals.updatePrefs);
+})
 
 //app.get -> fetches user preferences from database
+app.get('/api/prefs/:userId', apiController.getPrefs, (req, res) => {
+  console.log('fetched user preferences');
+  return res.status(200).json(res.locals.getPrefs);
+})
 
-
-//app.delete & app.patch for stretch
+//app.delete -> deletes a dog from users_dogs when user unlikes them
+app.delete('/api/delete/:dogId', apiController.deleteLikedDogs, (req, res) => {
+  console.log('deleted like dog');
+  return res.status(200).json(res.locals.deleted);
+})
 
 app.use((err, req, res, next) => {
   const defaultErr = {
