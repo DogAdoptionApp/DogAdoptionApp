@@ -3,68 +3,50 @@ import Box from '@mui/material/Box';
 import SvgIcon from '@mui/material/SvgIcon';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
+// gender toggle button group
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+// save button
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import Stack from '@mui/material/Stack';
 
 export default function SwipeableTemporaryDrawer() {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [state, setState] = React.useState({left: false});
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-
     setState({ ...state, [anchor]: open });
   };
 
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
+//gender ToggleButtonGroup functionality
+  const [gender, setGender] = React.useState('');
+  const handleChangeGender = (event, chosenGender) => {
+    setGender(chosenGender);
   };
+//gender END
 
 
   const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+    <Box sx={{ width: '75vw' }} role="presentation">
+    <ToggleButtonGroup
+      color="primary"
+      value={gender}
+      exclusive
+      onChange={handleChangeGender}
     >
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+      <ToggleButton value="male">Male</ToggleButton>
+      <ToggleButton value="female">Female</ToggleButton>
+      {/* <ToggleButton value="ios">Both</ToggleButton> */}
+    </ToggleButtonGroup>
     <Divider></Divider>
+    <Stack direction="row" spacing={6}>
+
+      <Button variant="contained" endIcon={<SaveAltIcon />}  onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
+        Save
+      </Button>
+    </Stack>
     </Box>
   );
 
@@ -72,7 +54,7 @@ export default function SwipeableTemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}><FilterAltIcon/></Button>
+          <FilterAltIcon onClick={toggleDrawer(anchor, true)}/>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}
