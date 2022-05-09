@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,6 +19,48 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function LikedCard() {
+  const initialState = {
+    dogs: []
+  };
+
+  const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    //hard coded to user 1 for now
+    fetch("/api/like/1")
+    .then(data => data.json())
+    .then(res => setState({dogs: res}))
+    .catch(err => console.log(err))
+    
+}, [])
+  const arrayOfAccordions = [];
+  for (const obj in state.dogs) {
+    arrayOfAccordions.push(
+      <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography>
+          <img src={state.dogs[obj].photo} style={{"height":"100px"}}/> {state.dogs[obj].name}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          <ul>
+            <li>Breed: {state.dogs[obj].breed}</li>
+            <li>Size: {state.dogs[obj].size}</li>
+            <li>Location: {state.dogs[obj].location}</li>
+            <li>Gender: {state.dogs[obj].gender}</li>
+            <li><a href={state.dogs[obj].petfinder_url}>Click for more info!</a></li>
+          </ul>
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+    )
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -29,41 +71,11 @@ export default function LikedCard() {
               <ArrowBackIosIcon />
               <SearchIcon />
             </Link>
+            <h1>Liked Dogs</h1>
           </Toolbar>
         </AppBar>
         <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Accordion 1</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography>Accordion 2</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
+          {arrayOfAccordions}
         </Box>
       </Container>
     </React.Fragment>
