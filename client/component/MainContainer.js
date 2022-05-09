@@ -93,7 +93,51 @@ const MainContainer = (props) => {
   );
 
   function handleNext() {
-    changeState({ ...state, index: state.index + 1 });
+    let currentIndex = state.index + 1;
+    if (currentIndex > 99) {
+      currentIndex = 0;
+    }
+    changeState({ ...state, index: currentIndex });
+  }
+
+  function handleLike() {
+    const photo = state.dogs[state.index].primary_photo_cropped;
+    let likePhoto;
+    if (photo.hasOwnProperty("medium")) {
+      likePhoto = photo.medium;
+    } else if (photo.hasOwnProperty("small")) {
+      likePhoto = photo.small;
+    } else if (photo.hasOwnProperty("large")) {
+      likePhoto = photo.large;
+    } else if (photo.hasOwnProperty("full")) {
+      likePhoto = photo.full;
+    }
+    // const { petfinder_id, petfinder_url, name, photo, gender, size, breed, location } = req.body;
+    const data = {
+      petfinder_id: state.dogs[state.index].id,
+      petfinder_url: state.dogs[state.index].url,
+      name: state.dogs[state.index].name,
+      photo: likePhoto,
+      gender: state.dogs[state.index].gender,
+      size: state.dogs[state.index].size,
+      breed: state.dogs[state.index].breeds.primary,
+      location: state.dogs[state.index].contact.address.postcode,
+    };
+    fetch("/api/like/1", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success", data);
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+    handleNext();
   }
 
   return (
@@ -104,7 +148,11 @@ const MainContainer = (props) => {
           {/* send prefernces handle click to navbar */}
           <Navbar />
           {/* <h1>{state.index}</h1> */}
-          <MainCard dog={state.dogs[state.index]} handleNext={handleNext} />
+          <MainCard
+            dog={state.dogs[state.index]}
+            handleNext={handleNext}
+            handleLike={handleLike}
+          />
         </Box>
       </Container>
     </React.Fragment>
