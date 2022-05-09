@@ -93,7 +93,11 @@ const MainContainer = (props) => {
   );
 
   function handleNext() {
-    changeState({ ...state, index: state.index + 1 });
+    let currentIndex = state.index + 1;
+    if (currentIndex > 99) {
+      currentIndex = 0;
+    }
+    changeState({ ...state, index: currentIndex });
   }
 
   function handleLike() {
