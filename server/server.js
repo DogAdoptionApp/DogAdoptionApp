@@ -6,17 +6,22 @@ const apiController = require('./controllers');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//app.post
-app.post('/api/like/:userId', apiController.save, (req, res) => {
-  console.log("api working");
+//app.post -> receive dog info and save it to the users likes list
+app.post('/api/like/:userId', apiController.saveLikedDog, (req, res) => {
+  console.log("dog has been saved to database");
   return res.sendStatus(200);
 });
 
-//app.get
-// app.get('/api/like/:userId', (req, res) => {
-//   console.log("api working");
-//   res.send(200);
-// });
+//app.get -> return users liked dogs for the faves pages
+app.get('/api/like/:userId', apiController.fetchLikedDogs, (req, res) => {
+  console.log('fetched dogs: ' + res.locals.dogs);
+  return res.status(200).json(res.locals.dogs);
+});
+
+//app.post -> stores user preferences in database
+
+
+//app.get -> fetches user preferences from database
 
 
 //app.delete & app.patch for stretch
