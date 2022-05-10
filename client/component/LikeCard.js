@@ -33,10 +33,20 @@ export default function LikedCard() {
     .catch(err => console.log(err))
     
 }, [])
+
+
+  deleteDog (dogId => {
+    fetch(`/api/delete/${dogId}`, {method: 'DELETE'})
+    .then(() => useEffect())
+    .catch(err => console.log(err))
+  })
+
+
   const arrayOfAccordions = [];
   for (const obj in state.dogs) {
     arrayOfAccordions.push(
       <Accordion>
+
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -53,8 +63,9 @@ export default function LikedCard() {
             <li>Size: {state.dogs[obj].size}</li>
             <li>Location: {state.dogs[obj].location}</li>
             <li>Gender: {state.dogs[obj].gender}</li>
-            <li><a href={state.dogs[obj].petfinder_url}>Click for more info!</a></li>
+            <li><a target="_blank" href={state.dogs[obj].petfinder_url}>Click for more info!</a></li>
           </ul>
+          <button id={state.dogs[obj]._id} onClick={deleteDog}>Delete</button>
         </Typography>
       </AccordionDetails>
     </Accordion>
