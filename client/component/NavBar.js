@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Drawer from './Drawer';
 import { Link } from "react-router-dom";
+import PetsIcon from '@mui/icons-material/Pets';
 
 export default function Navbar() {
   return (
@@ -15,7 +16,8 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <Drawer />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} align="center">
+          <PetsIcon style={{position: 'relative', top: '3px', right: "4px"}}/>
             Puppy Love 
           </Typography>
             <Link to="/likedCard" style={{ color: 'white' }}><FavoriteIcon /><ArrowForwardIosIcon/></Link>
