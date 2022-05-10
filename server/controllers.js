@@ -56,8 +56,11 @@ apiController.fetchLikedDogs = (req, res, next) => {
 
 apiController.addPrefs = (req, res, next) => {
   //save user preferences to database
+  console.log(req.body, "helllooo")
   const { userId } = req.params;
   const { location, size_pref, age_pref, gender_pref,	breed_pref,	has_dog, has_kid } = req.body;
+  const has_dogs = has_dog === "true" ? "1" : "0";
+  const has_kids = has_kid === "true" ? "1": "0";
 
   const usersPref = `
   UPDATE Users SET location = $1, size_pref = $2, age_pref = $3, gender_pref = $4, breed_pref = $5, has_dog = $6, has_kid = $7  
@@ -65,7 +68,7 @@ apiController.addPrefs = (req, res, next) => {
   RETURNING *
   `;
 
-  const value = [location, size_pref, age_pref, gender_pref, breed_pref, has_dog, has_kid];
+  const value = [location, size_pref, age_pref, gender_pref, breed_pref, has_dogs, has_kids];
 
   db.query(usersPref, value)
     .then(data => {

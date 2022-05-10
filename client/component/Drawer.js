@@ -21,12 +21,29 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Breeds from './assets/breeds.json'
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer({ getPreferencesHandleClick }) {
+  console.log(getPreferencesHandleClick)
   const [state, setState] = React.useState({ left: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
     setState({ ...state, [anchor]: open });
+    
   };
+
+  const handleSave = () => {
+    const newPref = {
+      "size_pref": size,
+      "age_pref": age,
+      "gender_pref": gender,
+      "breed_pref": breeds,
+      "has_dogs": dogs, //=== "true" ? true : false,
+      "has_kids": kids //=== "true" ? true : false
+    };
+    getPreferencesHandleClick(newPref)
+  }
+
+  //BREEDS SELECT DROPDOWN
+  const [breeds, setBreeds] = React.useState("");
 
   //GENDER ToggleButtonGroup functionality
   const [gender, setGender] = React.useState("");
@@ -201,25 +218,25 @@ export default function SwipeableTemporaryDrawer() {
       </Typography>
       <Autocomplete
       disablePortal={true}
+      onChange={(event, value) => setBreeds(value)}
       id="combo-box-demo"
       options={Breeds.breeds}
       // sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="select" />}
+      renderInput={(params) => <TextField {...params} label="auto-complete" />}
     />
     {/* END BREEDS */}
       <Stack direction="row" spacing={6}align="center"  style={{ display: "flex", justifyContent: "center" , position: 'relative', top: '20px'}}>
         <Button
           variant="contained"
           endIcon={<SaveAltIcon />}
-          onClick={toggleDrawer(anchor, false)}
-          onKeyDown={toggleDrawer(anchor, false)}
+          onClick={()=> handleSave()}
+          // onKeyDown={toggleDrawer(anchor, false)}
         >
           Save
         </Button>
       </Stack>
     </Box>
   );
-console.log(Breeds)
   return (
     <div>
       {["left"].map((anchor) => (
