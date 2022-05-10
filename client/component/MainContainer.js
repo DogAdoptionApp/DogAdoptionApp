@@ -41,7 +41,31 @@ const MainContainer = (props) => {
   // This function makes an API call to petfinder based on user input to preferences. Will run onClick of save button in preferences menu. Then it invokes 'changeDog' which updates the 'dog' array in state.
   const getPreferencesHandleClick = (form) => {
     //send prefernces to server
-    getDogsFromApi();
+
+    let newPrefs = { ...form, location: state.location };
+
+    console.log(newPrefs, "djqifhaoifjoifoi");
+    fetch("/api/prefs/1", {
+      method: "PATCH",
+      body: JSON.stringify(newPrefs),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data[0], "response from PATCH==========");
+        setPreferencesToState();
+      });
+  };
+
+  const setPreferencesToState = () => {
+    fetch("api/prefs/1", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((data) => console.log(data));
   };
   const getDogsFromApi = () => {
     //get preferences from server if none deafult to all dogs
@@ -69,22 +93,22 @@ const MainContainer = (props) => {
         client_secret: secret,
       };
 
-      fetch("https://api.petfinder.com/v2/oauth2/token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success", data);
-          token = data.access_token;
-          getDogsFromApi();
-        })
-        .catch((error) => {
-          console.log("Error", error);
-        });
+      // fetch("https://api.petfinder.com/v2/oauth2/token", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(data),
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log("Success", data);
+      //     token = data.access_token;
+      //     getDogsFromApi();
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error", error);
+      //   });
 
       // second call is the query +> pass in access_token and preferences
     },
@@ -139,14 +163,14 @@ const MainContainer = (props) => {
       });
     handleNext();
   }
-
+  console.log(state);
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="sm">
         <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
           {/* send prefernces handle click to navbar */}
-          <Navbar />
+          <Navbar getPreferencesHandleClick={getPreferencesHandleClick} />
           {/* <h1>{state.index}</h1> */}
           <MainCard
             dog={state.dogs[state.index]}

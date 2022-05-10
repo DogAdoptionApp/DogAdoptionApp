@@ -10,12 +10,12 @@ import Drawer from './Drawer';
 import { Link } from "react-router-dom";
 import PetsIcon from '@mui/icons-material/Pets';
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Drawer />
+          <Drawer getPreferencesHandleClick={props.getPreferencesHandleClick}/>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} align="center">
           <PetsIcon style={{position: 'relative', top: '3px', right: "4px"}}/>
             Puppy Love 

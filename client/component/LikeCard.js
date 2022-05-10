@@ -56,7 +56,6 @@ export default function LikedCard() {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
           <ul>
             <li>Breed: {state.dogs[obj].breed}</li>
             <li>Size: {state.dogs[obj].size}</li>
@@ -65,7 +64,6 @@ export default function LikedCard() {
             <li><a target="_blank" href={state.dogs[obj].petfinder_url}>Click for more info!</a></li>
           </ul>
           <button id={state.dogs[obj]._id}>Delete</button>
-        </Typography>
       </AccordionDetails>
     </Accordion>
     )
@@ -81,7 +79,9 @@ export default function LikedCard() {
               <ArrowBackIosIcon />
               <SearchIcon />
             </Link>
-            <h1>Liked Dogs</h1>
+            <Typography variant="h6"  sx={{ flexGrow: 1 }} align="center">
+            Favorites
+          </Typography>
           </Toolbar>
         </AppBar>
         <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>

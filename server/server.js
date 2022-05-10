@@ -26,7 +26,7 @@ app.patch('/api/prefs/:userId', apiController.addPrefs, (req, res) => {
 
 //app.get -> fetches user preferences from database
 app.get('/api/prefs/:userId', apiController.getPrefs, (req, res) => {
-  console.log('fetched user preferences');
+  console.log('fetched user preferences', res.locals.getPrefs);
   return res.status(200).json(res.locals.getPrefs);
 })
 
