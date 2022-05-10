@@ -39,12 +39,15 @@ const MainContainer = (props) => {
   const [state, changeState] = useState(initialState);
 
   // This function makes an API call to petfinder based on user input to preferences. Will run onClick of save button in preferences menu. Then it invokes 'changeDog' which updates the 'dog' array in state.
-  const getPreferencesHandleClick = (form) => {
-    //send prefernces to server
-    getDogsFromApi();
+  const updatePreferencesHandleClick = (data) => {
+    //fetch patch to db for user preferences. ONLY send data to database.
+    //call set prefernces function
   };
+  //get preferences FUNCTION will get preferences from db and set to state. THEN in promise call Get dogs API
+
   const getDogsFromApi = () => {
-    //get preferences from server if none deafult to all dogs
+    //get prefercnes from state and concat a string to send as a url if all NULL send default string for all dogs
+
     fetch("https://api.petfinder.com/v2/animals?type=dog&limit=100", {
       headers: {
         Authorization: "Bearer " + token,
@@ -58,7 +61,7 @@ const MainContainer = (props) => {
       .catch((error) => {
         console.log("Error", error);
       });
-  };
+    };
   // This hook runs once on initial page load (becuase its second arg is an empty array). It makes an API call to petfinder for generic dogs (not based on user prefs).
   useEffect(
     () => {
@@ -80,9 +83,9 @@ const MainContainer = (props) => {
         .then((data) => {
           console.log("Success", data);
           token = data.access_token;
-          getDogsFromApi();
-        })
-        .catch((error) => {
+          //get prerfernces function on page load to set state from db.
+          //getDogsFromApi(); remove this goes INSIDE the set-preferences function
+        })//. within th erpe promise        .catch((error) => {
           console.log("Error", error);
         });
 
