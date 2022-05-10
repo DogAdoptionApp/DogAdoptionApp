@@ -65,10 +65,10 @@ const MainContainer = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((data) => console.log(data));
+    }).then((data) => console.log(data)); //need to set prefernces from db to state and then call getDogsFromApi
   };
   const getDogsFromApi = () => {
-    //get preferences from server if none deafult to all dogs
+    //get preferences from state and concat a string with query params to send to petfinder API. if none deafult to all dogs
     fetch("https://api.petfinder.com/v2/animals?type=dog&limit=100", {
       headers: {
         Authorization: "Bearer " + token,
@@ -104,6 +104,7 @@ const MainContainer = (props) => {
         .then((data) => {
           console.log("Success", data);
           token = data.access_token;
+          //need to call setPreferencesToState and then inside that function call getDogsFromApi
           getDogsFromApi();
         })
         .catch((error) => {
