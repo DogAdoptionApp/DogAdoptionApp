@@ -93,22 +93,22 @@ const MainContainer = (props) => {
         client_secret: secret,
       };
 
-      // fetch("https://api.petfinder.com/v2/oauth2/token", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(data),
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log("Success", data);
-      //     token = data.access_token;
-      //     getDogsFromApi();
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error", error);
-      //   });
+      fetch("https://api.petfinder.com/v2/oauth2/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success", data);
+          token = data.access_token;
+          getDogsFromApi();
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
 
       // second call is the query +> pass in access_token and preferences
     },
