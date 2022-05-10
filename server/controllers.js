@@ -54,5 +54,72 @@ apiController.fetchLikedDogs = (req, res, next) => {
   
 }
 
+apiController.addPrefs = (req, res, next) => {
+  //save user preferences to database
+  const { userId } = req.params;
+  const { location, size_pref, age_pref, gender_pref,	breed_pref,	has_dog, has_kid } = req.body;
+
+  const usersPref = `
+  UPDATE Users SET location = $1, size_pref = $2, age_pref = $3, gender_pref = $4, breed_pref = $5, has_dog = $6, has_kid = $7  
+  WHERE _id = ${userId}
+  RETURNING *
+  `;
+
+  const value = [location, size_pref, age_pref, gender_pref, breed_pref, has_dog, has_kid];
+
+  db.query(usersPref, value)
+    .then(data => {
+      res.locals.updatePrefs = data.rows;
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: 'Error patching',
+        message: { err }
+      })
+    })
+
+}
+
+apiController.getPrefs = (req, res, next) => {
+  //fetch user prefs for front end to call api based on the prefs
+  const { userId } = req.params;
+
+  const usersPrefList = `
+    SELECT * FROM users WHERE _id = ${userId}
+  `;
+
+  db.query(usersPrefList)
+  .then(data => {
+    res.locals.getPrefs = data.rows;
+    return next();
+  })
+  .catch(err => {
+    return next({
+      log: 'Error getting back user preferences',
+      message: { err }
+    })
+  })
+}
+
+apiController.deleteLikedDogs = (req, res, next) => {
+  const { dogId } = req.params;
+  const deleteDog = `
+  DELETE FROM users_dogs WHERE dogs_id = ${dogId}
+  RETURNING *
+  `;
+
+  db.query(deleteDog)
+  .then(data => {
+    res.locals.deleted = data.rows;
+    return next();
+  })
+  .catch(err => {
+    return next({
+    log: 'Error deleting dog',
+    message: { err }
+    })
+  })
+}
 
 module.exports = apiController;

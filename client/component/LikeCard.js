@@ -34,16 +34,19 @@ export default function LikedCard() {
     
 }, [])
 
+
   deleteDog (dogId => {
     fetch(`/api/delete/${dogId}`, {method: 'DELETE'})
     .then(() => useEffect())
     .catch(err => console.log(err))
   })
 
+
   const arrayOfAccordions = [];
   for (const obj in state.dogs) {
     arrayOfAccordions.push(
-      <Accordion >
+      <Accordion>
+
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
